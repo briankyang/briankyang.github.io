@@ -1,0 +1,315 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>数据库知识整理 | Future</title><meta name="description" content="数据库知识整理"><meta name="keywords" content="数据库"><meta name="author" content="icoding"><meta name="copyright" content="icoding"><meta name="format-detection" content="telephone=no"><link rel="shortcut icon" href="/img/favicon.ico"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="https://fonts.googleapis.com" crossorigin="crossorigin"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta name="twitter:card" content="summary"><meta name="twitter:title" content="数据库知识整理"><meta name="twitter:description" content="数据库知识整理"><meta name="twitter:image" content="http://icoding666.github.io/img/post.jpg"><meta property="og:type" content="article"><meta property="og:title" content="数据库知识整理"><meta property="og:url" content="http://icoding666.github.io/2020/03/21/%E6%95%B0%E6%8D%AE%E5%BA%93/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86/"><meta property="og:site_name" content="Future"><meta property="og:description" content="数据库知识整理"><meta property="og:image" content="http://icoding666.github.io/img/post.jpg"><script src="https://cdn.jsdelivr.net/npm/js-cookie/dist/js.cookie.min.js"></script><script>var autoChangeMode = '1'
+var t = Cookies.get("theme")
+if (autoChangeMode == '1'){
+  var isDarkMode = window.matchMedia("(prefers-color-scheme: dark)").matches
+  var isLightMode = window.matchMedia("(prefers-color-scheme: light)").matches
+  var isNotSpecified = window.matchMedia("(prefers-color-scheme: no-preference)").matches
+  var hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+  if (t === undefined){
+    if (isLightMode) activateLightMode()
+    else if (isDarkMode) activateDarkMode()
+    else if (isNotSpecified || hasNoSupport){
+      console.log('You specified no preference for a color scheme or your browser does not support it. I Schedule dark mode during night time.')
+      var now = new Date()
+      var hour = now.getHours()
+      var isNight = hour < 6 || hour >= 18
+      isNight ? activateDarkMode() : activateLightMode()
+  }
+  } else if (t == 'light') activateLightMode()
+  else activateDarkMode()
+
+} else if (autoChangeMode == '2'){
+  now = new Date();
+  hour = now.getHours();
+  isNight = hour < 6 || hour >= 18
+  if(t === undefined) isNight? activateDarkMode() : activateLightMode()
+  else if (t === 'light') activateLightMode()
+  else activateDarkMode() 
+} else {
+  if ( t == 'dark' ) activateDarkMode()
+  else if ( t == 'light') activateLightMode()
+}
+
+function activateDarkMode(){
+  document.documentElement.setAttribute('data-theme', 'dark')
+  if (document.querySelector('meta[name="theme-color"]') !== null){
+    document.querySelector('meta[name="theme-color"]').setAttribute('content','#000')
+  }
+}
+function activateLightMode(){
+  document.documentElement.setAttribute('data-theme', 'light')
+  if (document.querySelector('meta[name="theme-color"]') !== null){
+  document.querySelector('meta[name="theme-color"]').setAttribute('content','#fff')
+  }
+}</script><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@latest/css/font-awesome.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css"><link rel="canonical" href="http://icoding666.github.io/2020/03/21/%E6%95%B0%E6%8D%AE%E5%BA%93/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86/"><link rel="prev" title="操作系统知识整理" href="http://icoding666.github.io/2020/03/21/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86/"><link rel="next" title="网络知识整理" href="http://icoding666.github.io/2020/03/21/%E7%BD%91%E7%BB%9C%E7%9F%A5%E8%AF%86/%E7%BD%91%E7%BB%9C%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86/"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"cookieDomain":"https://xxx/","msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  bookmark: {
+    message_prev: '按',
+    message_next: '键将本页加入书签'
+  },
+  runtime_unit: '天',
+  runtime: true,
+  copyright: undefined,
+  ClickShowText: undefined,
+  medium_zoom: false,
+  fancybox: true,
+  Snackbar: undefined,
+  baiduPush: false,
+  highlightCopy: true,
+  highlightLang: true,
+  highlightShrink: 'false',
+  isFontAwesomeV5: false,
+  isPhotoFigcaption: false
+  
+}</script><script>var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isSidebar: true  
+  }</script><noscript><style>
+#page-header {
+  opacity: 1
+}
+.justified-gallery img{
+  opacity: 1
+}
+</style></noscript><meta name="generator" content="Hexo 4.2.0"></head><body><div id="mobile-sidebar"><div id="menu_mask"></div><div id="mobile-sidebar-menus"><div class="mobile_author_icon"><img class="avatar-img" src="/img/avatar.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="mobile_post_data"><div class="mobile_data_item is-center"><div class="mobile_data_link"><a href="/archives/"><div class="headline">文章</div><div class="length_num">16</div></a></div></div><div class="mobile_data_item is-center">      <div class="mobile_data_link"><a href="/tags/"><div class="headline">标签</div><div class="length_num">3</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> About</span></a></div><div class="menus_item"><a class="site-page"><i class="fa-fw fa fa-list" aria-hidden="true"></i><span> List</span><i class="fa fa-chevron-down menus-expand" aria-hidden="true"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/music/"><i class="fa-fw fa fa-music"></i><span> Music</span></a></li><li><a class="site-page" href="/movies/"><i class="fa-fw fa fa-film"></i><span> Movie</span></a></li></ul></div></div></div></div><i class="fa fa-arrow-right on" id="toggle-sidebar" aria-hidden="true">     </i><div id="sidebar"><div class="sidebar-toc"><div class="sidebar-toc__title">目录</div><div class="sidebar-toc__progress"><span class="progress-notice">你已经读了</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar">     </div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Mysql数据库知识整理"><span class="toc-number">1.</span> <span class="toc-text">Mysql数据库知识整理</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#锁机制"><span class="toc-number">1.1.</span> <span class="toc-text">锁机制</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#基本概念"><span class="toc-number">1.1.0.0.1.</span> <span class="toc-text">基本概念</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#表级锁"><span class="toc-number">1.1.0.0.2.</span> <span class="toc-text">表级锁</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#存储引擎"><span class="toc-number">1.2.</span> <span class="toc-text">存储引擎</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#MyISAM"><span class="toc-number">1.2.0.1.</span> <span class="toc-text">MyISAM</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#InnoDB"><span class="toc-number">1.2.0.2.</span> <span class="toc-text">InnoDB</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#索引"><span class="toc-number">1.3.</span> <span class="toc-text">索引</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#事务"><span class="toc-number">1.4.</span> <span class="toc-text">事务</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#隔离级别"><span class="toc-number">1.5.</span> <span class="toc-text">隔离级别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#堆表"><span class="toc-number">1.6.</span> <span class="toc-text">堆表</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#聚簇索引表"><span class="toc-number">1.7.</span> <span class="toc-text">聚簇索引表</span></a></li></ol></li></ol></div></div></div><div id="body-wrap"><div class="post-bg" id="nav" style="background-image: url(/img/post.jpg)"><div id="page-header"><span class="pull_left" id="blog_name"><a class="blog_title" id="site-name" href="/">Future</a></span><span class="pull_right menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> About</span></a></div><div class="menus_item"><a class="site-page"><i class="fa-fw fa fa-list" aria-hidden="true"></i><span> List</span><i class="fa fa-chevron-down menus-expand" aria-hidden="true"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/music/"><i class="fa-fw fa fa-music"></i><span> Music</span></a></li><li><a class="site-page" href="/movies/"><i class="fa-fw fa fa-film"></i><span> Movie</span></a></li></ul></div></div><span class="toggle-menu close"><a class="site-page"><i class="fa fa-bars fa-fw" aria-hidden="true"></i></a></span></span></div><div id="post-info"><div id="post-title"><div class="posttitle">数据库知识整理</div></div><div id="post-meta"><div class="meta-firstline"><time class="post-meta__date"><span class="post-meta__date-created" title="发表于 2020-03-21 16:46:41"><i class="fa fa-calendar" aria-hidden="true"></i> 发表于 2020-03-21</span><span class="post-meta__separator">|</span><span class="post-meta__date-updated" title="更新于 2020-03-25 14:42:46"><i class="fa fa-history" aria-hidden="true"></i> 更新于 2020-03-25</span></time></div><div class="meta-secondline"> </div><div class="meta-thirdline"><span class="post-meta-pv-cv"><i class="fa fa-eye post-meta__icon" aria-hidden="true"> </i><span>阅读量:</span><span id="busuanzi_value_page_pv"></span></span><span class="post-meta-commentcount"></span></div></div></div></div><main class="layout_post" id="content-inner"><article id="post"><div id="article-container"><h1 id="Mysql数据库知识整理"><a href="#Mysql数据库知识整理" class="headerlink" title="Mysql数据库知识整理"></a>Mysql数据库知识整理</h1><h2 id="锁机制"><a href="#锁机制" class="headerlink" title="锁机制"></a>锁机制</h2><h5 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h5><ul>
+<li><p>功能: 协调多个会话中多线程并发访问相同资源时，资源占用问题。</p>
+</li>
+<li><p>贯彻模块: 索引，锁机制，事务</p>
+</li>
+<li><p>锁概念</p>
+<ul>
+<li><p>共享锁、排它锁</p>
+</li>
+<li><p>表锁、行级锁、间隙锁</p>
+</li>
+</ul>
+</li>
+</ul>
+<h5 id="表级锁"><a href="#表级锁" class="headerlink" title="表级锁"></a>表级锁</h5><ul>
+<li><p>两种锁: 共享读锁，排它写锁</p>
+</li>
+<li><p>MyISAM存储引擎</p>
+<ul>
+<li><p>只支持表级锁, 因此MyISAM引擎读写操作之间，写写操作之间是串行化的。</p>
+</li>
+<li><p>当一次会话线程获取表的写锁后，只有当前持有该写锁的会话线程可以对表进行操作，其他线程的读写都会等待，直到锁释放 </p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="存储引擎"><a href="#存储引擎" class="headerlink" title="存储引擎"></a>存储引擎</h2><h4 id="MyISAM"><a href="#MyISAM" class="headerlink" title="MyISAM"></a>MyISAM</h4><ul>
+<li>专注性能，不支持事务，只支持表级锁</li>
+</ul>
+<h4 id="InnoDB"><a href="#InnoDB" class="headerlink" title="InnoDB"></a>InnoDB</h4><ul>
+<li><p>支持事务，支持表级锁、行级锁、间隙锁</p>
+</li>
+<li><p>采用MVCC来支持高并发，算是乐观锁吧</p>
+</li>
+<li><p>MVCC</p>
+<ul>
+<li><p>基本原理: 通过在每行数据增加3个隐藏列来实现, DB_TRX_ID(最后被哪个事务修改), DB_ROLLBACK_PTR(指向undolog的指针, 指向回滚日志的指针), flag(是否被删除)，然后查询时的时候根据记录的这三个隐藏列信息及当前(或事务一开始的)数据库的事务信息去筛选列是否被包含进试图, 然后就解决了脏读或不可重复读的问题</p>
+</li>
+<li><p>两种读方式</p>
+<ul>
+<li><p>快照读：读取的只是当前事务的可见版本，不用加锁, MVCC实现</p>
+</li>
+<li><p>当前读：读取的是当前版本，会加锁，如lock in share mode, for update, update, insert, delete都会加锁，加的是行级锁和或行级锁和间隙锁，读取的是最新版本</p>
+</li>
+</ul>
+</li>
+<li><p>基本概念</p>
+<ul>
+<li><p>undoLog：事务回滚日志</p>
+<ul>
+<li><p>insert类型的undoLog</p>
+<ul>
+<li>insert事务完成后可以直接删除</li>
+</ul>
+</li>
+<li><p>update类型的undoLog</p>
+<ul>
+<li>update事务完成后需等到系统没有比当前undoLog更早的read-view时才可删除</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>read-view: 包含3个字段</p>
+<ul>
+<li><p>alive_trx_list:正在活跃的事务id(包含当前事务)</p>
+</li>
+<li><p>up_limit_id:上面的id中最小的一个</p>
+</li>
+<li><p>low_limit_id: 上面id中最大的一个加一</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>实现原理</p>
+<ul>
+<li><p>通过在每行记录后面保存三个隐藏的列来实现</p>
+<ul>
+<li><p>DB_TRX_ID：自动创建的事务id</p>
+</li>
+<li><p>DB_ROLLBACK_PTR：指向回滚日志的指针</p>
+</li>
+<li><p>flag: 是否删除</p>
+</li>
+</ul>
+</li>
+<li><p>RR模式下事务第一次获取到活跃事务列表后就保存一份快照(snapshotview)，后续根据这个快照来获取视图</p>
+</li>
+<li><p>RC模式下每次读都会从系统获取当前的活跃事务(readview)</p>
+</li>
+<li><p>获取行记录</p>
+</li>
+<li><p>判断行的DB_TRX_ID是否小于readview的最小的或等于当前id, 若是则可以直接读这行记录</p>
+</li>
+<li><p>是否大于等于low_limit_id，若是则不可见，根据回滚指针去undoLog查询上一条记录</p>
+</li>
+<li><p>是否在活跃事务列表(RR模式活跃事务列表在事务一开始就确定了，RC模式下每次快照读都会获取最新的活跃事务列表)，若是则不可见，根据回滚指针获取上一条记录</p>
+</li>
+<li><p>否则可见</p>
+</li>
+</ul>
+</li>
+<li><p>幻读</p>
+<ul>
+<li><p>定义</p>
+<p>指一个事务前后两次查询同一个范围的时候，后一次查询到了前一次没有看到的行</p>
+</li>
+<li><p>例子</p>
+<ul>
+<li><p>事务A按照一定条件进行数据读取，期间事务B插入了相同搜索条件的新数据，事务A再读，事务A发现了事务B插入的数据，幻读出现</p>
+<ul>
+<li>若事务A按一定条件搜索期间事务B删除了符合条件的某一条数据，A读少了，这归为不可重复读</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>产生</p>
+<ul>
+<li>快照读和当前读混用</li>
+</ul>
+</li>
+<li><p>解决办法</p>
+<ul>
+<li>当前读，通过加行锁和间隙锁阻止新数据插入，如事务A读取</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>注意：MVCC只在可重复读和读已提交两个隔离级别下才能正常工作</p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h2><ul>
+<li><p>MyISAM</p>
+<ul>
+<li><p>B+树索引</p>
+</li>
+<li><p>索引和数据文件分开，索引叶节点存储数据记录的地址</p>
+</li>
+</ul>
+</li>
+<li><p>InnoDB</p>
+<ul>
+<li><p>B+树索引</p>
+</li>
+<li><p>主键索引</p>
+<ul>
+<li>表数据文件本身就是按B+树组织的一个索引结构，这个索引是主键索引，所以Innodb必须要有主键</li>
+</ul>
+</li>
+<li><p>辅助索引</p>
+<ul>
+<li>叶节点存储相应记录主键的值，使用时首先检索辅助索引获得主键的值，然后用主键到主键索引中检索获得记录</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>B+树索引</p>
+<ul>
+<li><p>磁盘读写代价更低，内部节点没有指向关键字具体信息的指针，因此内部节点相对B树更小</p>
+</li>
+<li><p>数据都存储在叶子节点，方便区间查询</p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="事务"><a href="#事务" class="headerlink" title="事务"></a>事务</h2><p>4个特性</p>
+<ul>
+<li><p>原子性</p>
+<ul>
+<li>不可分割的操作单元，要么全部成功，要么全部失败</li>
+</ul>
+</li>
+<li><p>一致性</p>
+<ul>
+<li>事务开始前到结束后，数据库的完整性约束没有被破坏</li>
+</ul>
+</li>
+<li><p>隔离性</p>
+<ul>
+<li>每个事务与其他事务之间彼此独立和透明，互不影响</li>
+</ul>
+</li>
+<li><p>持久性</p>
+<ul>
+<li>事务一旦提交，其对数据的影响是永久性的。</li>
+</ul>
+</li>
+</ul>
+<p>实现：通过redolog和undolog完成</p>
+<h2 id="隔离级别"><a href="#隔离级别" class="headerlink" title="隔离级别"></a>隔离级别</h2><table>
+<thead>
+<tr>
+<th></th>
+<th>脏读</th>
+<th>不可重复读</th>
+<th>幻读</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>读未提交</td>
+<td>可能</td>
+<td>可能</td>
+<td>可能</td>
+</tr>
+<tr>
+<td>读已提交</td>
+<td>不可能</td>
+<td>可能</td>
+<td>可能</td>
+</tr>
+<tr>
+<td>可重复读</td>
+<td>不可能</td>
+<td>不可能</td>
+<td>可能</td>
+</tr>
+<tr>
+<td>序列化</td>
+<td>不可能</td>
+<td>不可能</td>
+<td>不可能</td>
+</tr>
+</tbody></table>
+<h2 id="堆表"><a href="#堆表" class="headerlink" title="堆表"></a>堆表</h2><ul>
+<li>所有记录无序存储</li>
+</ul>
+<h2 id="聚簇索引表"><a href="#聚簇索引表" class="headerlink" title="聚簇索引表"></a>聚簇索引表</h2><ul>
+<li>所有记录按照主键进行排序存储</li>
+</ul>
+</div><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">icoding</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://icoding666.github.io/2020/03/21/%E6%95%B0%E6%8D%AE%E5%BA%93/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86/">http://icoding666.github.io/2020/03/21/%E6%95%B0%E6%8D%AE%E5%BA%93/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://icoding666.github.io" target="_blank">Future</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a></div><div class="post_share"><div class="social-share" data-image="/img/post.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css"/><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js"></script></div></div><div class="post-reward"><a class="reward-button button--primary button--animated"> <i class="fa fa-qrcode"></i> 打赏<div class="reward-main"><ul class="reward-all"><li class="reward-item"><img class="lazyload post-qr-code__img" src="/img/wechat.jpg" alt="微信"/><div class="post-qr-code__desc">微信</div></li><li class="reward-item"><img class="lazyload post-qr-code__img" src="/img/alipay.jpg" alt="支付寶"/><div class="post-qr-code__desc">支付寶</div></li></ul></div></a></div><nav class="pagination_post" id="pagination"><div class="prev-post pull_left"><a href="/2020/03/21/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86/"><img class="prev_cover lazyload" data-src="/img/post.jpg" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">操作系统知识整理</div></div></a></div><div class="next-post pull_right"><a href="/2020/03/21/%E7%BD%91%E7%BB%9C%E7%9F%A5%E8%AF%86/%E7%BD%91%E7%BB%9C%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86/"><img class="next_cover lazyload" data-src="/img/post.jpg" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">网络知识整理</div></div></a></div></nav></article></main><footer id="footer" data-type="color"><div id="footer-wrap"><div class="copyright">&copy;2020 By icoding</div><div class="framework-info"><span>驱动 </span><a href="https://hexo.io" target="_blank" rel="noopener"><span>Hexo</span></a><span class="footer-separator">|</span><span>主题 </span><a href="https://github.com/jerryc127/hexo-theme-butterfly" target="_blank" rel="noopener"><span>Butterfly</span></a></div></div></footer></div><section class="rightside" id="rightside"><div id="rightside-config-hide"><i class="fa fa-book" id="readmode" title="阅读模式"></i><i class="fa fa-plus" id="font_plus" title="放大字体"></i><i class="fa fa-minus" id="font_minus" title="缩小字体"></i><a class="translate_chn_to_cht" id="translateLink" href="javascript:translatePage();" title="简繁转换" target="_self">繁</a><i class="darkmode fa fa-moon-o" id="darkmode" title="夜间模式"></i></div><div id="rightside-config-show"><div id="rightside_config" title="设置"><i class="fa fa-cog" aria-hidden="true"></i></div><i class="fa fa-list-ul close" id="mobile-toc-button" title="目录" aria-hidden="true"></i><i class="fa fa-arrow-up" id="go-up" title="回到顶部" aria-hidden="true"></i></div></section><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page@latest/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/lazysizes@latest/lazysizes.min.js" async=""></script></body></html>

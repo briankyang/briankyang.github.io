@@ -1,0 +1,329 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>JDK基础汇总 | Future</title><meta name="description" content="JDK基础汇总"><meta name="author" content="icoding"><meta name="copyright" content="icoding"><meta name="format-detection" content="telephone=no"><link rel="shortcut icon" href="/img/favicon.ico"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="https://fonts.googleapis.com" crossorigin="crossorigin"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta name="twitter:card" content="summary"><meta name="twitter:title" content="JDK基础汇总"><meta name="twitter:description" content="JDK基础汇总"><meta name="twitter:image" content="http://icoding666.github.io/img/post.jpg"><meta property="og:type" content="article"><meta property="og:title" content="JDK基础汇总"><meta property="og:url" content="http://icoding666.github.io/2020/03/24/java/JDK%E5%9F%BA%E7%A1%80%E6%B1%87%E6%80%BB/"><meta property="og:site_name" content="Future"><meta property="og:description" content="JDK基础汇总"><meta property="og:image" content="http://icoding666.github.io/img/post.jpg"><script src="https://cdn.jsdelivr.net/npm/js-cookie/dist/js.cookie.min.js"></script><script>var autoChangeMode = '1'
+var t = Cookies.get("theme")
+if (autoChangeMode == '1'){
+  var isDarkMode = window.matchMedia("(prefers-color-scheme: dark)").matches
+  var isLightMode = window.matchMedia("(prefers-color-scheme: light)").matches
+  var isNotSpecified = window.matchMedia("(prefers-color-scheme: no-preference)").matches
+  var hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+  if (t === undefined){
+    if (isLightMode) activateLightMode()
+    else if (isDarkMode) activateDarkMode()
+    else if (isNotSpecified || hasNoSupport){
+      console.log('You specified no preference for a color scheme or your browser does not support it. I Schedule dark mode during night time.')
+      var now = new Date()
+      var hour = now.getHours()
+      var isNight = hour < 6 || hour >= 18
+      isNight ? activateDarkMode() : activateLightMode()
+  }
+  } else if (t == 'light') activateLightMode()
+  else activateDarkMode()
+
+} else if (autoChangeMode == '2'){
+  now = new Date();
+  hour = now.getHours();
+  isNight = hour < 6 || hour >= 18
+  if(t === undefined) isNight? activateDarkMode() : activateLightMode()
+  else if (t === 'light') activateLightMode()
+  else activateDarkMode() 
+} else {
+  if ( t == 'dark' ) activateDarkMode()
+  else if ( t == 'light') activateLightMode()
+}
+
+function activateDarkMode(){
+  document.documentElement.setAttribute('data-theme', 'dark')
+  if (document.querySelector('meta[name="theme-color"]') !== null){
+    document.querySelector('meta[name="theme-color"]').setAttribute('content','#000')
+  }
+}
+function activateLightMode(){
+  document.documentElement.setAttribute('data-theme', 'light')
+  if (document.querySelector('meta[name="theme-color"]') !== null){
+  document.querySelector('meta[name="theme-color"]').setAttribute('content','#fff')
+  }
+}</script><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@latest/css/font-awesome.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css"><link rel="canonical" href="http://icoding666.github.io/2020/03/24/java/JDK%E5%9F%BA%E7%A1%80%E6%B1%87%E6%80%BB/"><link rel="prev" title="AQS解析" href="http://icoding666.github.io/2020/03/30/java/AQS%E8%A7%A3%E6%9E%90/"><link rel="next" title="JavaAgent知识" href="http://icoding666.github.io/2020/03/23/java/JavaAgent%E7%9F%A5%E8%AF%86/"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"cookieDomain":"https://xxx/","msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  bookmark: {
+    message_prev: '按',
+    message_next: '键将本页加入书签'
+  },
+  runtime_unit: '天',
+  runtime: true,
+  copyright: undefined,
+  ClickShowText: undefined,
+  medium_zoom: false,
+  fancybox: true,
+  Snackbar: undefined,
+  baiduPush: false,
+  highlightCopy: true,
+  highlightLang: true,
+  highlightShrink: 'false',
+  isFontAwesomeV5: false,
+  isPhotoFigcaption: false
+  
+}</script><script>var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isSidebar: true  
+  }</script><noscript><style>
+#page-header {
+  opacity: 1
+}
+.justified-gallery img{
+  opacity: 1
+}
+</style></noscript><meta name="generator" content="Hexo 4.2.0"></head><body><div id="mobile-sidebar"><div id="menu_mask"></div><div id="mobile-sidebar-menus"><div class="mobile_author_icon"><img class="avatar-img" src="/img/avatar.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="mobile_post_data"><div class="mobile_data_item is-center"><div class="mobile_data_link"><a href="/archives/"><div class="headline">文章</div><div class="length_num">16</div></a></div></div><div class="mobile_data_item is-center">      <div class="mobile_data_link"><a href="/tags/"><div class="headline">标签</div><div class="length_num">3</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> About</span></a></div><div class="menus_item"><a class="site-page"><i class="fa-fw fa fa-list" aria-hidden="true"></i><span> List</span><i class="fa fa-chevron-down menus-expand" aria-hidden="true"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/music/"><i class="fa-fw fa fa-music"></i><span> Music</span></a></li><li><a class="site-page" href="/movies/"><i class="fa-fw fa fa-film"></i><span> Movie</span></a></li></ul></div></div></div></div><i class="fa fa-arrow-right on" id="toggle-sidebar" aria-hidden="true">     </i><div id="sidebar"><div class="sidebar-toc"><div class="sidebar-toc__title">目录</div><div class="sidebar-toc__progress"><span class="progress-notice">你已经读了</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar">     </div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#JVM"><span class="toc-number">1.</span> <span class="toc-text">JVM</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#JMM"><span class="toc-number">1.1.</span> <span class="toc-text">JMM</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#as-if-serial"><span class="toc-number">1.1.1.</span> <span class="toc-text">as-if-serial</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#内存屏障"><span class="toc-number">1.1.2.</span> <span class="toc-text">内存屏障</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Happens-Before"><span class="toc-number">1.1.3.</span> <span class="toc-text">Happens-Before</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#Happens-Before规则之无需任何同步手段就可以保证的"><span class="toc-number">1.1.3.0.0.1.</span> <span class="toc-text">Happens-Before规则之无需任何同步手段就可以保证的</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#实现原理"><span class="toc-number">1.1.4.</span> <span class="toc-text">实现原理</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#锁膨胀与锁升级"><span class="toc-number">2.</span> <span class="toc-text">锁膨胀与锁升级</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#垃圾回收"><span class="toc-number">3.</span> <span class="toc-text">垃圾回收</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#垃圾回收算法"><span class="toc-number">3.1.</span> <span class="toc-text">垃圾回收算法</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#JAVA并发"><span class="toc-number">4.</span> <span class="toc-text">JAVA并发</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#线程切换"><span class="toc-number">4.1.</span> <span class="toc-text">线程切换</span></a></li></ol></li></ol></div></div></div><div id="body-wrap"><div class="post-bg" id="nav" style="background-image: url(/img/post.jpg)"><div id="page-header"><span class="pull_left" id="blog_name"><a class="blog_title" id="site-name" href="/">Future</a></span><span class="pull_right menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> About</span></a></div><div class="menus_item"><a class="site-page"><i class="fa-fw fa fa-list" aria-hidden="true"></i><span> List</span><i class="fa fa-chevron-down menus-expand" aria-hidden="true"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/music/"><i class="fa-fw fa fa-music"></i><span> Music</span></a></li><li><a class="site-page" href="/movies/"><i class="fa-fw fa fa-film"></i><span> Movie</span></a></li></ul></div></div><span class="toggle-menu close"><a class="site-page"><i class="fa fa-bars fa-fw" aria-hidden="true"></i></a></span></span></div><div id="post-info"><div id="post-title"><div class="posttitle">JDK基础汇总</div></div><div id="post-meta"><div class="meta-firstline"><time class="post-meta__date"><span class="post-meta__date-created" title="发表于 2020-03-24 23:01:08"><i class="fa fa-calendar" aria-hidden="true"></i> 发表于 2020-03-24</span><span class="post-meta__separator">|</span><span class="post-meta__date-updated" title="更新于 2020-03-26 18:07:28"><i class="fa fa-history" aria-hidden="true"></i> 更新于 2020-03-26</span></time></div><div class="meta-secondline"> </div><div class="meta-thirdline"><span class="post-meta-pv-cv"><i class="fa fa-eye post-meta__icon" aria-hidden="true"> </i><span>阅读量:</span><span id="busuanzi_value_page_pv"></span></span><span class="post-meta-commentcount"></span></div></div></div></div><main class="layout_post" id="content-inner"><article id="post"><div id="article-container"><h1 id="JVM"><a href="#JVM" class="headerlink" title="JVM"></a>JVM</h1><h2 id="JMM"><a href="#JMM" class="headerlink" title="JMM"></a>JMM</h2><h3 id="as-if-serial"><a href="#as-if-serial" class="headerlink" title="as-if-serial"></a>as-if-serial</h3><p>单线程内编译器、处理器都不会对有数据依赖关系的操作进行重排序</p>
+<h3 id="内存屏障"><a href="#内存屏障" class="headerlink" title="内存屏障"></a>内存屏障</h3><p>内存屏障指令用来告诉处理器在此指令执行的时候，先于这个命令的必须先执行，后于这个命令的都必须后执行，并在此处刷新缓冲区到主存。如果字段是volatile，java内存模型将在写操作后插入一个写屏障指令，在读操作前插入一个读屏障指令。这意味着如果你对一个volatile字段进行写操作，你必须知道：</p>
+<ul>
+<li><p>一旦你完成写入，任何访问这个字段的线程将会得到最新的值</p>
+</li>
+<li><p>在你写入之前，会保证所有之前应该发生的事都已发生，并且任何更新过的volatile数据也都被刷新到了主存，是可见的。</p>
+</li>
+</ul>
+<h3 id="Happens-Before"><a href="#Happens-Before" class="headerlink" title="Happens-Before"></a>Happens-Before</h3><p>如果一个操作执行的结果需要对另一个操作可见，那么这两个操作之间就必须要存在happens-before关系，这是一种编程上的约束，jmm在实现的时候会禁止改变程序执行结果的重排序，但不会禁止不改变程序执行结果的重排序。</p>
+<p>临界区内的指令可以重排序，但jmm不允许临界区内的指令“逸出”到临界区外，那样会破坏监视器的语义，jmm会在退出临界区和进入临界区这两个关键事件点做一些特别处理。</p>
+<h6 id="Happens-Before规则之无需任何同步手段就可以保证的"><a href="#Happens-Before规则之无需任何同步手段就可以保证的" class="headerlink" title="Happens-Before规则之无需任何同步手段就可以保证的"></a>Happens-Before规则之无需任何同步手段就可以保证的</h6><ul>
+<li><p>程序顺序规则：一个线程中的每个操作，happens-before于该线程中的任意后续操作</p>
+</li>
+<li><p>监视器锁规则：对一个锁的解锁，happens-before于随后对这个锁的加锁</p>
+</li>
+<li><p>volatile变量规则：对一个volatile变量的写，happens-before于任意后续对这个volatile变量的读</p>
+</li>
+<li><p>传递性：如果A happens-before B, 且B happens-before C， 那么A happens-before C</p>
+</li>
+<li><p>start（）规则：如果线程A执行ThreadB.start()，那么线程A的ThreadB.start() happens-before于线程B中的任意操作</p>
+</li>
+<li><p>join（）规则：如果线程A执行ThreadB.join() 并成功返回，那么线程B中的任意操作happens-before于线程A从ThreadB.join()操作成功返回</p>
+</li>
+<li><p>线程中断规则：对线程interrupt方法的调用happens-before于被终端线程的代码检测到中断事件的发生</p>
+</li>
+</ul>
+<h3 id="实现原理"><a href="#实现原理" class="headerlink" title="实现原理"></a>实现原理</h3><ul>
+<li><p>volatile的内存语义</p>
+<ul>
+<li><p>volatile变量自身具有以下特性</p>
+<ul>
+<li><p>可见性：对一个volatile变量的读，总能看到（任意线程）对这个volatile变量最后的写入（写入的操作happens-before当前线程对volatile这个变量的读）</p>
+</li>
+<li><p>原子性：对任意单个volatile变量的读写具有原子性，但类似于volatile++这种复合操作不具有原子性</p>
+</li>
+</ul>
+</li>
+<li><p>volatile写的语义如下：当写一个volatile变量时，jmm会把该线程对应的本地内存中的共享变量值立即刷入到主内存（会在写指令后执行写屏障指令来完成）</p>
+</li>
+<li><p>volatile读的内存语义：当读一个volatile变量时，jmm会把该线程对应的本地缓存置为无效，线程将接卸来从主内存中读取共享变量</p>
+</li>
+</ul>
+</li>
+<li><p>锁的内存语义</p>
+<ul>
+<li><p>当线程释放锁时，jmm会把该线程对应的本地内存中的共享变量刷新到主内存中</p>
+</li>
+<li><p>当线程获取锁时，jmm会把该线程对应的本地内存置为无效，从而使得被监视器保护的临界区代码必须从主存中读取共享变量</p>
+</li>
+<li><p>synchronized的实现原理：使用monitorenter和monitorexit指令实现</p>
+<ul>
+<li><p>monitorenter指令在编译后插入到同步代码块开始的位置，而monitorexit是插入到方法结束处和异常处（实现步骤）</p>
+</li>
+<li><p>每个monitorenter必须有对应的monitorexit与之对应（约束）</p>
+</li>
+<li><p>任何对象都有一个monitor与之关联，当且一个monitor被持有后，它将处于锁定状态</p>
+</li>
+<li><p>锁存放的位置</p>
+<ul>
+<li>锁信息存放在对象MarkWord当中</li>
+</ul>
+</li>
+<li><p>锁信息由MarkWord中的bit位标识，而markword是被复用的字段，其后3位标识了当前markword的意义</p>
+<ul>
+<li><p>后两位00表示轻量级锁，然后前面的进制位是指向栈中锁记录的指针</p>
+<ul>
+<li><p>优点：竞争线程不会阻塞，提高了程序的响应速度</p>
+</li>
+<li><p>缺点：如果始终得不到锁竞争的线程，使用自旋会消耗cpu</p>
+</li>
+<li><p>使用场景：追求响应时间，同步块执行速度非常快</p>
+</li>
+</ul>
+</li>
+<li><p>后两位11表示重量级锁，然后前面的是指向互斥锁的指针</p>
+<ul>
+<li><p>优点：线程竞争不会使用自选，不会消耗cpu</p>
+</li>
+<li><p>缺点：线程阻塞，响应时间缓慢</p>
+</li>
+<li><p>使用场景：追求吞吐量、同步块执行速度较长</p>
+</li>
+</ul>
+</li>
+<li><p>11表示需要被gc</p>
+</li>
+<li><p>01分两种情况：</p>
+<ul>
+<li><p>前一位是1：表示偏向锁，此前29个进制位的信息为：线程id（23位），epoch，对象分代年龄</p>
+<ul>
+<li><p>优点：加锁和解锁不需要额外的消耗，和执行非同步方法相比仅存在纳秒级别的差别</p>
+</li>
+<li><p>缺点：如果线程间存在锁竞争，会带来额外的锁撤销的消耗</p>
+</li>
+<li><p>使用于只有一个线程访问同步块的场景</p>
+</li>
+</ul>
+</li>
+<li><p>前一位是0：表示无锁状态，此前29个进制位信息位：hashCode（25bit），对象分代年龄（4bit）</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>final的内存语义</p>
+<ul>
+<li><p>编译器和处理器要遵守两个重排序规则</p>
+<ul>
+<li><p>在构造器内对一个final域的写入，于随后把这个被构造对象的引用赋值给一个引用变量，这两个操作之间不能重排序</p>
+</li>
+<li><p>初次读一个包含final域的对象的引用，于随后初次读这个final域，这两个操作之间不能重排序（看不懂）</p>
+</li>
+</ul>
+</li>
+<li><p>final域为引用类型</p>
+<ul>
+<li>在构造器内对一个final引用的对象的成员域的写入，与随后在构造函数外把这个被构造对象的引用赋值给一个引用变量，这两个操作之间不能重排序</li>
+</ul>
+</li>
+<li><p>final语义在处理器中的实现</p>
+<ul>
+<li><p>会要求编译器在final域的写入后，构造函数return之前插入一个storestore屏障</p>
+</li>
+<li><p>读final域的重排序规则要求编译器在读final域的操作前面插入一个loadload屏障</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="锁膨胀与锁升级"><a href="#锁膨胀与锁升级" class="headerlink" title="锁膨胀与锁升级"></a>锁膨胀与锁升级</h1><p>偏向锁 -&gt; 轻量级锁 -&gt; 自旋锁 -&gt; 重量级锁</p>
+<p>偏向第一个拿到锁的线程，第一个拿到锁的线程会在markword中通过cas记录线程id，此后每次拿锁都不需要cas，如果该线程执行同步代码块时有其他线程在竞争，会被升级为轻量级锁，如果其他线程发现markword里不是自己，且原有偏向锁的线程已经执行完同步代码块，则会尝试cas把记录线改为自己。</p>
+<p>轻量级锁</p>
+<p>jvm会给线程的栈帧中创建一个锁记录空间，把对象头复制到该空间里，并通过cas尝试把markword中的锁记录指向该锁记录，如果成功则拿到锁，失败则自旋</p>
+<p>自旋锁</p>
+<p>膨胀为重量级锁前，线程在执行monitorenter指令进入等待队列时，会通过自旋锁去尝试获得锁，如果自旋超过一定次数，则会进入阻塞态，等待内核调度，此时会发生内核态和用户态之间的上下文切换，会影响性能，因为后面的线程也会尝试进行自旋获取锁，所以此时对已被阻塞的那些线程来说不公平。</p>
+<p>重量级锁</p>
+<p>通过内核来操作线程，因频繁出现内核态和用户态的切换，会严重影响性能</p>
+<h1 id="垃圾回收"><a href="#垃圾回收" class="headerlink" title="垃圾回收"></a>垃圾回收</h1><h2 id="垃圾回收算法"><a href="#垃圾回收算法" class="headerlink" title="垃圾回收算法"></a>垃圾回收算法</h2><ul>
+<li><p>标记清除</p>
+<ul>
+<li><p>最基础的算法</p>
+</li>
+<li><p>主要缺点</p>
+<ul>
+<li><p>效率问题，标记和清除过程效率不高</p>
+</li>
+<li><p>空间问题，标记清除后会产生大量不连续的内存碎片</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>标记-整理算法</p>
+<ul>
+<li><p>标记操作和标记清除算法一致，后续操作不只是直接清理对象，而是在清理无用对象后完成然所有存活的对象都向一端移动，并更新引用其对象的指针</p>
+</li>
+<li><p>缺点：在标记清除的基础上还需要移动对象和更新引用指针，代价大</p>
+</li>
+<li><p>好处：不会产生内存碎片</p>
+</li>
+</ul>
+</li>
+<li><p>复制算法</p>
+<ul>
+<li><p>主要用于回收新生代，将可用内存划分为大小相等的两块，每次只使用其中一块，当一块用完之后，就将还存货的对象移到另一块上面，而且对每个对象的年龄加1，然后清除已经使用过的内存，这样每次都不会产生碎片，只要移动堆顶的指针，按顺序分配内存即可，实现简单，运行高效</p>
+</li>
+<li><p>缺点：可用内存缩小为原来一半</p>
+</li>
+</ul>
+</li>
+<li><p>分代收集算法</p>
+<ul>
+<li><p>基于一个事实：不同对象的生命周期不同，因此，不同生命周期的对象可以采取不同的回收算法，以便高效回收</p>
+</li>
+<li><p>年轻代：新生代内存按照8：1：1分成eden区和两个survivor区</p>
+<ul>
+<li>应用程序只能使用一个新生代和一个复活代，当发生初级垃圾回收的时候，gc挂起程序，将新生代和复活代中的存活对象复制到另一个非活动的复活代，然后一次性清除新生代和复活代，将原来的非复活代标记成为活动复活代，将在指定次数后仍然存活的对象移到老年代中，初级回收后，得到一个新的可用的新生代</li>
+</ul>
+</li>
+<li><p>老年代：标记清除算法</p>
+</li>
+</ul>
+</li>
+</ul>
+<p>可达性分析：</p>
+<ul>
+<li><p>GCroots：</p>
+<ul>
+<li><p>虚拟机栈，栈帧中的本地变量表中引用的对象</p>
+</li>
+<li><p>方法区中加载的类的静态属性引用的对象</p>
+</li>
+<li><p>方法区中常量引用的对象</p>
+</li>
+<li><p>本地方法栈中引用的对象</p>
+</li>
+<li><p>HotSpot需要确定gcroots时，并不需要遍历整个方法区或堆，而是知道哪些地方存放着对象的引用，这是有一个叫OopMap的数据结构来实现的</p>
+</li>
+</ul>
+</li>
+</ul>
+<p>类的回收条件</p>
+<ul>
+<li><p>该类产生的对象实例已全部被回收</p>
+</li>
+<li><p>加载该类的类加载器已被回收</p>
+</li>
+<li><p>该类的类对象没有任何在任何地方引用，无法反射出这个类的方法</p>
+</li>
+</ul>
+<h1 id="JAVA并发"><a href="#JAVA并发" class="headerlink" title="JAVA并发"></a>JAVA并发</h1><h2 id="线程切换"><a href="#线程切换" class="headerlink" title="线程切换"></a>线程切换</h2><ul>
+<li><p>java线程状态：</p>
+<ul>
+<li><p>初始：创建了线程对象，还没start</p>
+</li>
+<li><p>运行：java线程中将就绪和运行两种状态统称为运行</p>
+</li>
+<li><p>阻塞：表示线程阻塞于锁</p>
+</li>
+<li><p>等待：进入该状态的线程需要等待其他线程做出一些特定动作（通知或中断）</p>
+</li>
+<li><p>超时等待：可以在指定的时间内自行返回</p>
+</li>
+<li><p>终止：表示该线程已经执行完毕</p>
+</li>
+</ul>
+</li>
+<li><p>同步队列</p>
+<ul>
+<li><p>抢锁的时候没有抢到锁线程进入对象的同步队列</p>
+</li>
+<li><p>抢到锁后再wait会进入对象的等待队列</p>
+</li>
+<li><p>抢到锁后再调用notify则会让等待队列的线程进入同步队列</p>
+</li>
+<li><p>LockSupport.park或unpark都只是让对象进入等待状态或唤醒，juc中使用这种方式来竞争锁。</p>
+</li>
+</ul>
+</li>
+</ul>
+</div><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">icoding</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://icoding666.github.io/2020/03/24/java/JDK%E5%9F%BA%E7%A1%80%E6%B1%87%E6%80%BB/">http://icoding666.github.io/2020/03/24/java/JDK%E5%9F%BA%E7%A1%80%E6%B1%87%E6%80%BB/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://icoding666.github.io" target="_blank">Future</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="/img/post.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css"/><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js"></script></div></div><div class="post-reward"><a class="reward-button button--primary button--animated"> <i class="fa fa-qrcode"></i> 打赏<div class="reward-main"><ul class="reward-all"><li class="reward-item"><img class="lazyload post-qr-code__img" src="/img/wechat.jpg" alt="微信"/><div class="post-qr-code__desc">微信</div></li><li class="reward-item"><img class="lazyload post-qr-code__img" src="/img/alipay.jpg" alt="支付寶"/><div class="post-qr-code__desc">支付寶</div></li></ul></div></a></div><nav class="pagination_post" id="pagination"><div class="prev-post pull_left"><a href="/2020/03/30/java/AQS%E8%A7%A3%E6%9E%90/"><img class="prev_cover lazyload" data-src="/img/post.jpg" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">AQS解析</div></div></a></div><div class="next-post pull_right"><a href="/2020/03/23/java/JavaAgent%E7%9F%A5%E8%AF%86/"><img class="next_cover lazyload" data-src="/img/post.jpg" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">JavaAgent知识</div></div></a></div></nav></article></main><footer id="footer" data-type="color"><div id="footer-wrap"><div class="copyright">&copy;2020 By icoding</div><div class="framework-info"><span>驱动 </span><a href="https://hexo.io" target="_blank" rel="noopener"><span>Hexo</span></a><span class="footer-separator">|</span><span>主题 </span><a href="https://github.com/jerryc127/hexo-theme-butterfly" target="_blank" rel="noopener"><span>Butterfly</span></a></div></div></footer></div><section class="rightside" id="rightside"><div id="rightside-config-hide"><i class="fa fa-book" id="readmode" title="阅读模式"></i><i class="fa fa-plus" id="font_plus" title="放大字体"></i><i class="fa fa-minus" id="font_minus" title="缩小字体"></i><a class="translate_chn_to_cht" id="translateLink" href="javascript:translatePage();" title="简繁转换" target="_self">繁</a><i class="darkmode fa fa-moon-o" id="darkmode" title="夜间模式"></i></div><div id="rightside-config-show"><div id="rightside_config" title="设置"><i class="fa fa-cog" aria-hidden="true"></i></div><i class="fa fa-list-ul close" id="mobile-toc-button" title="目录" aria-hidden="true"></i><i class="fa fa-arrow-up" id="go-up" title="回到顶部" aria-hidden="true"></i></div></section><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page@latest/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/lazysizes@latest/lazysizes.min.js" async=""></script></body></html>
